@@ -8,48 +8,62 @@ As a programmer, I have been duplicating this
 snippet of axios through out each component. 
 
 ```
-function(){
-  axios.get('')
-  .then(function (response) {
-    console.log(response)
+new Vue({
+
+mounted: function(){
+  axios.get('https://yesno.wtf/api')
+  .then(function (res) {
+    console.log(res)
   })
+  .catch(function(err)) {
+    console.log(err)
+  }
 }
+
+})
 ```
 
 `vue-autorequest` does away with this snippet by setting the 
 URL and receiving it at a destinated watch function. 
 
 1. Set the url at `mounted.url`
-2. Receive response its corresponding 
-watch method onMounted()
 
 ```
 new Vue({
   data: function(){
     return {
-      mounted: { 
-        url: ""
-      }
-    }
-  },
-  watch: {
-    onMounted(res){
-      console.log(res)
+      mounted: { url: 'https://yesno.wtf/api'}
     }
   }
 })
 ```
 
+2. Receive response its corresponding 
+watch method onMounted()
+
+```
+new Vue({
+  watch: {
+    onMounted(res, err){
+      console.log(res)
+      console.log(err)
+    }
+  }
+})
+```
+
+
 There are other 8 variables with its respective watch method: 
 
-- beforeMount   | onBeforeMount
-- beforeCreate  | onBeforeCreate
-- created       | onCreated
-- mounted       | onMounted
-- updated       | onUpdated
-- destroyed     | onDestroyed
-- beforeDestroy | onBeforeDestroy
-- beforeUpdate  | onBeforeUpdate
+- Lifecycle stage | Watch method
+- beforeMount     | onBeforeMount
+- beforeCreate    | onBeforeCreate
+- created         | onCreated
+- mounted         | onMounted
+- updated         | onUpdated
+- destroyed       | onDestroyed
+- beforeDestroy   | onBeforeDestroy
+- beforeUpdate    | onBeforeUpdate
 
 # License 
 
@@ -57,5 +71,4 @@ MIT
 
 # Contact
 
-[@ytbryan](http://twitter.com/ytbryan) 
-or [email](mailto:ytbryan@gmail.com)
+[@ytbryan](http://twitter.com/ytbryan) [email](mailto:ytbryan@gmail.com)
