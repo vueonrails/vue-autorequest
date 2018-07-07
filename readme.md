@@ -1,8 +1,19 @@
-#Vue-Autorequest
+# Vue-Autorequest
 
-`vue-autorequest` is a plugin that enables Vue-component 
-self-loading feature and reduces duplicates of `axios.get` across your component life-cycle hooks. 
-It depends on axios to make HTTP request.
+`vue-autorequest` is a Vue plugin that enables the  
+self-loading feature of Component and reduces duplicates of `axios.get` across your Vue instance's life-cycle hooks. It depends on axios to make HTTP request.
+
+## Install & Usage
+
+```
+yarn add vue-autorequest
+```
+
+```
+import Autorequest from 'vue-autorequest'
+Vue.use(Autorequest)
+```
+
 
 Instead of writing the following `get` request:
 
@@ -20,7 +31,7 @@ new Vue({
 })
 ```
 
-We could simply set the endpoint at `data` at `this.mounted.url`
+We could simply set the endpoint at Vue's `data` at the `this.mounted.url`
 
 > Replace `mounted` with `created` or `updated`
 
@@ -34,7 +45,7 @@ new Vue({
 })
 ```
 
-Receive response or catch error its corresponding 
+Receive response or catch error at its corresponding 
 watch method onMounted(). Replace `onMounted()` with `onCreated` or `onUpdated()`
 
 ```
@@ -47,6 +58,8 @@ new Vue({
 })
 ```
 
+
+## Lifecycle
 The life-cycle variable and its corresponding watch method. 
 
 - Lifecycle stage | Watch method
