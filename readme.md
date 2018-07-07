@@ -1,7 +1,6 @@
 # Vue-Autorequest
 
-`vue-autorequest` is a Vue plugin that enables the  
-self-loading feature of Component and reduces duplicates of `axios.get` across your Vue instance's life-cycle hooks. It depends on axios to make HTTP request.
+`vue-autorequest` is a Vue plugin that enables the self-loading feature of Component and reduces duplicates of `axios.get` across your Vue instance's life-cycle hooks. It depends on axios to make HTTP request.
 
 ## Install & Usage
 
