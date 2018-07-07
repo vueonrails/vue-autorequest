@@ -1,57 +1,64 @@
 /*!
 * Vue-Autorequest.js
-* v0.0.1
+* v1.0.0
 * (c) Bryan Lim; MIT License
 */
 
 import Vue from 'vue'
 import axios from 'axios'
-
 Vue.use(axios)
 
-const VueAutorequest = {
-  install(Vue, options) {
+const VueAutoload = {
+  install(Vue) {
     Vue.mixin({
       data: function () {
         return {
-          onComponentCreated: {
-            url: "", delay: 0, load: true
-          }, 
-          onComponentMounted: {
-            url: "", delay: 0, load: true
-          }, 
-          onComponentUpdated: {
-            url: "", delay: 0, load: true
-          }, 
-          createdURL: "",
-          mountedURL: "",
-          updatedURL: "",
-          onComponentMountedURL: "",
-          onComponentUpdatedURL: ""
+          onMounted: "",
+          onCreated: "",
+          onUpdated: "",
+          mounted: { url: "" },
+          created: { url: "" }, 
+          updated: { url: "" }
         }
       }, 
-      mounted() {
+      updated: function(){
         var appl = this
-        if(this.onComponentMountedURL != ""){
-          axios.get(this.onComponentMountedURL)
-          .then(function (response) {
-            appl.onComponentMounted = response
+        if(this.updated.url != ""){
+          axios.get(this.updated.url)
+          .then(function(response){
+            appl.onUpdated = response
+          })
+          .catch(function(err){
+            appl.onUpdated = err
           })
         }
       },
-      methods : {
-        update_component: function(){
-          var appl = this
-          if(this.onComponentUpdatedURL != ""){
-            axios.get(this.onComponentUpdatedURL)
-            .then(function (response) {
-              appl.onComponentUpdatedURL = response
-            })
-          } 
-        } // update
-      } // methods
+      mounted: function(){
+        var appl = this
+        if(this.mounted.url != ""){
+          axios.get(this.mounted.url)
+          .then(function(response){
+            appl.onMounted = response
+          })
+          .catch(function(err){
+            appl.onMounted = err
+          })
+        }
+      },
+      created: function(){
+        var appl = this
+        if(this.created.url != ""){
+          axios.get(this.created.url)
+          .then(function(response){
+            appl.onCreated = response
+          })
+          .catch(function(err){
+            appl.onCreated = err
+          })
+        }
+      }    
     })
   }
-}
+};
 
-export default VueAutorequest;
+export default VueAutoload;

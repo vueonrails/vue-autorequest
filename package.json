@@ -1,7 +1,7 @@
 {
   "name": "vue-autorequest",
   "version": "1.0.0",
-  "description": "Self Loading Vue Component",
+  "description": "Self-loading Vue Component",
   "main": "vue-autorequest.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,9 +15,11 @@
   ],
   "author": "Bryan Lim",
   "license": "MIT",
+  "email": "ytbryan@gmail.com",
+  "url": "http://github.com/ytbryan/vue-autorequest",
   "dependencies": {
-    "vue": "^2.5.16",
-    "axios": "^0.18.0"
+    "axios": "^0.18.0",
+    "vue": "^2.5.16"
   },
   "devDependencies": {
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
