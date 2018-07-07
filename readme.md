@@ -5,7 +5,12 @@
 ## Install & Usage
 
 ```
+//npm
+npm install vue-autorequest
+
+//yarn
 yarn add vue-autorequest
+
 ```
 
 ```
