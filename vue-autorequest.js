@@ -4,11 +4,9 @@
 * (c) Bryan Lim; MIT License
 */
 
-import Vue from 'vue'
 import axios from 'axios'
-Vue.use(axios)
 
-const VueAutoload = {
+const Autorequest = {
   install(Vue) {
     Vue.mixin({
       data: function () {
@@ -61,4 +59,4 @@ const VueAutoload = {
   }
 };
 
-export default VueAutoload;
+export default Autorequest;
