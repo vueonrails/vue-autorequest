@@ -6,7 +6,7 @@
 
 Instead of writing the following `axios.get` request at `mounted` function:
 
-```
+```javascript
 mounted: function(){
   axios.get('https://yesno.wtf/api')
   .then(function (res) {
@@ -20,7 +20,7 @@ mounted: function(){
 
 We could simply set the endpoint at Vue's `data` at the `this.mounted.url`
 
-```
+```javascript
 data: function(){
   return {
     mounted: { url: 'https://yesno.wtf/api'}
@@ -30,7 +30,7 @@ data: function(){
 > Replace `mounted` with `created` or `updated`
 
 Receive response or catch error at its corresponding `watch` method onMounted().
-```
+```javascript
 watch: {
   onMounted:function(res){
     console.log(res.data)
@@ -52,7 +52,7 @@ yarn add vue-autorequest
 
 ```
 
-```
+```javascript
 import Autorequest from 'vue-autorequest'
 Vue.use(Autorequest)
 ```
