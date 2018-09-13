@@ -1,10 +1,8 @@
 /*!
 * Vue-Autorequest.js
-* v1.0.0
+* v1.1.0
 * (c) Bryan Lim; MIT License
 */
-
-import axios from 'axios'
 
 const Autorequest = {
   install(Vue) {
@@ -20,41 +18,47 @@ const Autorequest = {
         }
       }, 
       updated: function(){
-        var appl = this
-        if(this.updated.url != ""){
-          axios.get(this.updated.url)
-          .then(function(response){
-            appl.onUpdated = response
-          })
-          .catch(function(err){
-            appl.onUpdated = err
-          })
-        }
+        this.request_for("updated", this.updated.url)
       },
       mounted: function(){
-        var appl = this
-        if(this.mounted.url != ""){
-          axios.get(this.mounted.url)
-          .then(function(response){
-            appl.onMounted = response
-          })
-          .catch(function(err){
-            appl.onMounted = err
-          })
-        }
+        this.request_for("mounted", this.mounted.url)
       },
       created: function(){
-        var appl = this
-        if(this.created.url != ""){
-          axios.get(this.created.url)
-          .then(function(response){
-            appl.onCreated = response
-          })
-          .catch(function(err){
-            appl.onCreated = err
-          })
+        this.request_for("created", this.created.url)
+      }, 
+      methods: {
+        request_for: function(stage, endpoint){
+          if(endpoint == "") return
+          var appl = this
+          var request = new XMLHttpRequest();
+          request.open("GET", endpoint, true)
+          request.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              if(this.response == undefined) return
+              var reply = JSON.parse(this.response)
+              if(stage == "updated"){
+                appl.onUpdated = reply
+              }else if(stage == "mounted"){
+                appl.onMounted = reply
+              } else if(stage == "created") {
+                appl.onCreated = reply
+              }
+            } 
+          }
+          request.onerror = function () {
+            if(this.err == undefined) return
+            var err = JSON.parse(this.err)
+            if(stage == "updated"){
+              appl.onUpdated = err
+            } else if(stage == "mounted"){
+              appl.onMounted = err
+            } else if(stage == "created") {
+              appl.onCreated = err
+            }
+          }
+          request.send()
         }
-      }    
+      }
     })
   }
 };

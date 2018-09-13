@@ -1,10 +1,12 @@
-# Vue-Autorequest
+# Welcome to Vue-Autorequest
 
-`vue-autorequest` is a Vue plugin that enables the automatic loading feature of the component and reduces duplicates of `axios.get` across your Vue instance's life-cycle hooks. It is designed to simplify small to medium components. It is created with [Vue on Rails](vueonrails.com) in mind. 
+Autorequest is a Vue component plugin to load the component part with initial data. It uses XMLHttpRequest. It is created with [Vue on Rails](http://vueonrails.com) in mind.
 
-`vue-autorequest` is not meant for complex components with multiple endpoints. 
+> `vue-autorequest` is designed for a single endpoint. And it is probably not for complex components with multiple endpoints. 
 
-Instead of writing the following `axios.get` request at `mounted` function:
+### Lesser `axios.get` on more component parts
+
+One of autorequest's goals is to reduce the `axios.get` spinkles and give you a smaller component part. A common axios.get spinkle is like the one below.
 
 ```javascript
 mounted: function(){
@@ -18,9 +20,10 @@ mounted: function(){
 }
 ```
 
-We could simply set the endpoint at Vue's `data` at the `this.mounted.url`
+Autorequest allows me to write the same data loading code like this: 
 
 ```javascript
+//1
 data: function(){
   return {
     mounted: { url: 'https://yesno.wtf/api'}
@@ -29,11 +32,13 @@ data: function(){
 ```
 > Replace `mounted` with `created` or `updated`
 
-Receive response or catch error at its corresponding `watch` method onMounted().
+At the `watch` method, receive response or catch error. 
+
 ```javascript
+//2
 watch: {
   onMounted:function(res){
-    console.log(res.data)
+    console.log({res})
   }
 }
 ```
